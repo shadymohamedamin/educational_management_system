@@ -1,0 +1,816 @@
+//freopen("file.txt","r",stdin);
+//freopen("file.txt","w",stdout);
+#include <iostream>
+#include<bits/stdc++.h>
+//#include<mysql.h>
+using namespace std;
+
+/*int x;
+void change1()
+{
+    ::x=9;
+}
+void change2()
+{
+    ::x=10;
+}
+
+int main()
+{
+    change1();
+    cout<<x;
+    change2();
+    cout<<x;*/
+
+/*fstream data;
+//templete
+vector<string> read()
+{
+    string ch;
+    data.open("file.txt",ios::in);
+    vector<string>v;
+    while (getline(data>>ws,ch))//data.get(ch))
+    {
+       v.push_back(ch);
+    }
+    data.close();
+    return v;
+}
+void write(vector<string>&v)
+{
+    data.open("file.txt",ios::out);
+    for(int i=0;i<v.size();i++)
+        data<<v[i]<<endl;
+    data.close();
+}
+void clears()
+{
+    data.open("file.txt",ios::out|ios::trunc);
+    data.close();
+}
+void sorts()
+{
+    vector<string>name=read();
+    sort(name.begin(),name.end());//n*log(n)
+    clears();
+    write(name);
+}*/
+struct student;
+struct course;
+struct doctor;
+struct assignment;
+//struct assignment_solution;
+
+
+struct doctor{
+    string user_name_;
+    string password_;
+    string full_name_;
+    string id_;
+    string email_;
+    vector<shared_ptr<course> >course_;
+    //vector<shared_ptr<assignment> >assignment_;
+};
+
+struct student{
+    string user_name_;
+    string password_;
+    string full_name_;
+    string id_;
+    string email_;
+    vector<shared_ptr<course> >course_;
+    //vector<shared_ptr<assignment> >assignment_;
+    ///shared_ptr<assignment_solution>assignment_solution_;
+};
+
+/*struct assignment_solution{
+    int grade_;
+    string solution_;
+
+    /*shared_ptr<student>student_;
+    shared_ptr<course>course_;
+    shared_ptr<doctor>doctor_;
+    shared_ptr<assignment>assignment_;
+    shared_ptr<assignment_solution>assignment_solution_;*/
+//};
+struct assignment{
+    int max_grade_,grade_;
+    string information_,solution_,comment_;
+    //shared_ptr<course>course_;//focus;;
+    //shared_ptr<assignment_solution>assignment_solution_;
+};
+struct course{
+    string name_;
+    string code_;
+    shared_ptr<doctor>doctor_;
+    vector<shared_ptr<student> >student_;
+    vector<shared_ptr<assignment> >assignment_;
+};
+bool valid_email(string name)
+{
+    if(name.find("@gmail.com")!=-1)return true;
+    else return false;
+}
+//template<typename T>
+shared_ptr<doctor>current_doctor(new doctor());
+shared_ptr<student>current_student(new student());
+bool is_find_doctor(vector<shared_ptr<doctor> >&v,string user_name,string password)
+{
+    //vector<shared_ptr<doctor>>doctor;
+    for(auto &d:v)
+    {
+        if(d->user_name_==user_name&&d->password_==password)
+        {
+            ::current_doctor=d;
+            return true;
+        }
+    }
+    return false;
+}
+bool is_find_student(vector<shared_ptr<student> >&v,string user_name,string password)
+{
+    //shared_ptr<student>>students;
+    for(auto &i:v)
+    {
+        //cout<<i->user_name_<<endl;
+        if(i->user_name_==user_name&&i->password_==password)
+        {
+            ::current_student=i;
+            return true;
+        }
+    }
+    return false;
+}
+
+int main()
+{
+       vector<shared_ptr<student>>students;
+       vector<shared_ptr<doctor>>doctors;
+       /*shared_ptr<course>c(new course());
+       shared_ptr<student>s(new student());
+       shared_ptr<doctor>d(new doctor());
+       shared_ptr<assignment>ass(new assignment());
+       //shared_ptr<assignment_solution>ass_sol(new assignment_solution());
+
+       students.push_back(s);
+       doctors.push_back(d);
+       doctors[0]->course_.push_back(c);
+       students[0]->course_.push_back(c);
+
+       students[0]->course_[0]->student_.push_back(s);
+       students[0]->course_[0]->doctor_=d;//.push_back(s);
+       students[0]->course_[0]->assignment_.push_back(ass);
+
+       students[0]->user_name_="shady";
+       students[0]->password_="123";
+       students[0]->course_[0]->doctor_->user_name_="fady";
+       students[0]->course_[0]->name_="p1";
+       students[0]->course_[0]->code_="001";
+
+       students[0]->course_[0]->assignment_[0]->solution_="hello";
+       //doctors[0]->course_[0]->assignment_[0]->solution_="hello1";
+       students[0]->course_[0]->assignment_[0]->grade_=5;
+       students[0]->course_[0]->assignment_[0]->max_grade_=10;
+
+       doctors[0]->course_.push_back(c);
+       doctors[0]->course_[1]->name_="p2";///.push_back(c);
+       cout<<doctors[0]->course_[0]->student_[0]->course_[0]->assignment_[0]->solution_;
+
+       cout<<endl<<1;*/
+
+
+
+       //course_->doctor_->user_name="fady";
+       /*students[0]->course_[0]->assignment_.push_back(ass);
+       doctors[0]->user_name_="fady";
+       students[0]->user_name_="shady";
+       students[0]->password_="123";
+       students[0]->course_[0]->name_="p1";
+       students[0]->course_[0]->code_="000";
+       //students[0]->course_[0]->doctor_->user_name_="fady";
+
+
+
+       //doctors[0]->course_.push_back(c);//="fady";
+
+       students[0]->course_[0]->assignment_[0]->solution_="hello";
+       students[0]->course_[0]->assignment_[0]->grade_=5;
+       students[0]->course_[0]->assignment_[0]->max_grade_=10;
+
+
+
+       /*c->name_="p1";
+       c->code_="001";
+
+       s->user_name_="shady";
+       s->password_="123";
+       d->user_name_="fad";
+       c->doctor_=d;
+       c->assignment[0]
+       //s->course_
+
+       //d->course_.push_back(c);
+       s->course_.push_back(c);
+       s->course_[0]->
+       c->student_.push_back(s);*/
+       //c->student_.push_back(s);
+       //cout<<c->student_[0]->user_name_;
+       while(1)
+       {
+        g1:cout<<"******************educational system**********************\n";
+           cout<<"1 : log in"<<endl;
+           cout<<"2 : sign up"<<endl;
+           cout<<"3 : shutdown"<<endl;
+           cout<<"please enter your choice.....\n";
+           int  choice;
+           cin>>choice;
+           if(choice==1)
+           {
+            g2:int c;
+               cout<<"enter your choice:\n1: log in as doctor \n2:log in as student\n";
+               cin>>c;
+               if(c==1)
+               {
+                   string user_name,password;
+                   cout<<"enter your user name\n";
+                   cin>>user_name;
+                   cout<<"enter your user password\n";
+                   cin>>password;
+                   if(!is_find_doctor(doctors,user_name,password))
+                   {
+                        cout<<"this name is not find you should do sign up\n";
+                        goto g1;
+                   }
+                   cout<<"welcome doctor "<<user_name<<endl;
+               g30:cout<<"enter your choice to continue\n";
+                   cout<<"1 : list courses\n";
+                   cout<<"2 : create course\n";
+                   cout<<"3 : view course\n";
+                   cout<<"4 : log out\n";
+                   cout<<"enter your choice...\n";
+                   int ccc;
+                   cin>>ccc;
+                   if(ccc==1)
+                   {
+                       cout<<"doctor has "<<current_doctor->course_.size()<<" courses\n";
+                       for(auto &i:current_doctor->course_)
+                       {
+                           cout<<"1: course name "<<i->name_<<" and has code "<<i->code_<<endl;
+                       }
+                   }
+                   else if(ccc==2)
+                   {
+                       string name1,name2;
+                       cout<<"enter the name of the course\n";
+                       cin>>name1;
+                       cout<<"enter the code of the course\n";
+                       cin>>name2;
+                       shared_ptr<course>c(new course());
+                       c->name_=name1;
+                       c->code_=name2;
+                       c->doctor_=current_doctor;
+                       current_doctor->course_.push_back(c);
+                       cout<<"Done\n";
+                   }
+                   else if(ccc==3)
+                   {
+                    if(current_doctor->course_.size()>0)
+                    {
+                       cout<<"doctor has "<<current_doctor->course_.size()<<" courses\n";
+                       for(auto &i:current_doctor->course_)
+                       {
+                           cout<<"1: course name "<<i->name_<<" and has code "<<i->code_<<endl;
+                       }
+                       cout<<"do you want to see which course???\n";
+                       int dx;
+                       cin>>dx;
+
+                   g40:cout<<"enter your choice to continue\n";
+                       cout<<"1 : list assignments \n";
+                       cout<<"2 : create assignment \n";
+                       cout<<"3 : view assignments \n";
+                       cout<<"4 : back \n";
+                       int cccc;
+                       cin>>cccc;
+                       if(cccc==1)
+                       {
+                            int co=0;
+                            for(auto &i:current_doctor->course_[dx-1]->assignment_)
+                            {
+                                ++co;
+                                cout<<"assignment"<<" "<<co<<" "<<i->information_<<" max grade "<<i->max_grade_<<endl;
+                            }
+                       }
+                       else if(cccc==2)
+                       {
+                            string name5;
+                            int mx;
+                            cout<<"enter the information of assignment\n";
+                            cin>>name5;
+                            cout<<"enter the maximum grade of assignment\n";
+                            cin>>mx;
+                            shared_ptr<assignment>ass(new assignment());
+                            ass->information_=name5;
+                            ass->max_grade_=mx;
+                            current_doctor->course_[dx-1]->assignment_.push_back(ass);
+                            cout<<"Done\n";
+                            //current_doctor->course_[dx-1].push_back(ass);
+                       }
+                       else if(cccc==3)
+                       {
+                            //dx idx of course4
+                            if(current_doctor->course_[dx-1]->assignment_.size()>0)
+                            {
+                                cout<<"do you want to see which assignment \n";
+                                int co=0;
+                                for(auto &i:current_doctor->course_[dx-1]->assignment_)
+                                {
+                                    ++co;
+                                    cout<<"assignment"<<" "<<co<<" "<<i->information_<<endl;
+                                }
+                                int dxdx;
+                                cin>>dxdx;
+                            g50:cout<<"enter your choice\n";
+                                cout<<"1: show information \n";
+                                cout<<"2: show grades and solutions of students of this course \n";
+                                //cout<<"3: list solution \n";
+                                //cout<<"4: view solution \n";
+                                cout<<"3: back \n";
+                                int ccccc;
+                                cin>>ccccc;
+                                if(ccccc==1)
+                                {
+                                    cout<<"the information of assignment "<<dxdx<<" is "<<current_doctor->course_[dx-1]->assignment_[dxdx-1]->information_<<"\n";
+
+                                }
+                                else if(ccccc==2)
+                                {
+
+                                    int yy=0;
+                                    for(auto &i:current_doctor->course_[dx-1]->student_)
+                                    {
+                                        cout<<"student "<<++yy<<" "<<i->user_name_<<" his assignment is "<<current_doctor->course_[dx-1]->assignment_[dxdx-1]->information_<<" solution is ";
+                                        int idx_course_student=1;
+                                        for(auto &j:i->course_)
+                                        {
+                                            if(current_doctor->course_[dx-1]->name_==j->name_)
+                                            {
+                                                break;
+                                            }
+                                            idx_course_student++;
+                                        }
+                                        //cout<<"idx_course_student "<<idx_course_student<<endl;
+                                        cout<<i->course_[idx_course_student-1]->assignment_[dxdx-1]->solution_<<" and his grade is "<<i->course_[idx_course_student-1]->assignment_[dxdx-1]->grade_<<" / "<<i->course_[idx_course_student-1]->assignment_[dxdx-1]->max_grade_<<endl;
+                                    }
+                                    cout<<"enter which number of student you want to see assignment of him???\n";
+                                    int ss,gg;
+                                    string cm;
+                                    cin>>ss;
+                                    cout<<"enter grade of solution of \n";
+                                    cin>>gg;
+                                    cout<<"enter comment of the solution \n";
+                                    cin>>cm;
+                                    int idx_student=1;
+                                        for(auto &j:current_doctor->course_[dx-1]->student_[ss-1]->course_)
+                                        {
+                                            if(current_doctor->course_[dx-1]->name_==j->name_)
+                                            {
+                                                break;
+                                            }
+                                            idx_student++;
+                                        }
+                                    //index of course of this student
+                                    current_doctor->course_[dx-1]->student_[ss-1]->course_[idx_student-1]->assignment_[dxdx-1]->grade_=gg;
+                                    current_doctor->course_[dx-1]->student_[ss-1]->course_[idx_student-1]->assignment_[dxdx-1]->comment_=cm;
+                                    goto g50;
+
+                                    // which assignment
+
+                                    //cout<<"set grad"
+                                    //cout<<"enter your choice\n";
+                                    //cout<<"1: set grade\n";
+                                    //cout<<"2: set comment\n";
+                                    //cout<<""
+                                    //int ch;
+                                    //cin>>ch;
+
+                                    //cout<<"the grade of assignment "<<dxdx<<" is "<<current_doctor->course_[dx-1]->assignment_[dxdx-1]->max_grade_<<"\n";
+                                }
+                                else if(ccccc==3)
+                                {
+                                     goto g40;
+                                }
+                                goto g50;
+                            }
+                            else cout<<"you have not any assignment yet\n";
+                       }
+                       else if(cccc==4) goto g30;
+                       goto g40;
+                    }
+                    else cout<<"you have not any courses yet\n";
+                       goto g30;
+                   }
+                   else if(ccc==4) goto g1;
+                   goto g30;
+                   //doctor_menue();
+               }
+               else if(c==2)
+               {
+                   string user_name,password;
+                   cout<<"enter your user name\n";
+                   cin>>user_name;
+                   cout<<"enter your user password\n";
+                   cin>>password;
+                   if(!is_find_student(students,user_name,password))
+                   {
+                        cout<<"this name is not find you should do sign up\n";
+                        goto g1;
+                   }
+                   //for(auto &i:)
+                   //::current_doctor=;
+                   cout<<"welcome "<<user_name<<endl;
+                   //student_menue();
+               g10:cout<<"1: register in course\n";
+                   cout<<"2: lists courses\n";
+                   cout<<"3: view course\n";
+                   cout<<"4: view grades\n";
+                   cout<<"5: log out\n";
+                   int c;
+                   cin>>c;
+                   if(c==1)
+                   {
+                       //shared_ptr<doctor>d(new doctor());
+                       vector<shared_ptr<course> >courses_doctor;///update
+                       for(auto &d:doctors)
+                       {
+                            for(auto &i:d->course_)
+                            {
+                                courses_doctor.push_back(i);
+                            }
+                       }
+                       //shared_ptr<student>s(new student());
+                       vector<shared_ptr<course> >courses_student;
+                       for(auto &i:current_student->course_)
+                       {
+                           courses_student.push_back(i);
+                       }
+                       map<string,int>visit;
+
+
+                       for(auto &i:courses_student)
+                       {
+                           visit[i->name_]=1;
+                       }
+                       vector<shared_ptr<course> >courses_available;
+                       for(auto &i:courses_doctor)
+                       {
+                           if(visit[i->name_]!=1)
+                           courses_available.push_back(i);
+                       }
+                       if(courses_available.size()==0)
+                       {
+                           cout<<"no available courses to register in\n";
+                           goto g10;
+                       }
+                       else if(courses_available.size()>0)
+                       {
+                           int idx=0;
+                           for(auto &i:courses_available)
+                           {
+                               ++idx;
+                               cout<<idx<<" : "<<i->name_<<"\n";
+                           }
+                           cout<<"enter your choice...";
+                           int c;
+                           cin>>c;
+                           //courses_available[c-1];
+                           current_student->course_.push_back(courses_available[c-1]);
+                           //shared_ptr<course>course__(new course());
+                           //students[0]->course_[0]->student_.push_back(s);
+                           current_student->course_[current_student->course_.size()-1]->student_.push_back(current_student);///sure that the student is added
+                       }
+                       cout<<"you register successfully\n";
+                       goto g10;
+                   }
+                   else if(c==2)
+                   {
+                       for(auto &i:current_student->course_)
+                       {
+                           cout<<i->name_<<" "<<i->code_<<endl;
+                       }
+                       goto g10;
+                   }
+                   else if(c==3)
+                   {
+                    if(current_student->course_.size()>0)
+                    {
+                       int idx=0;
+                       for(auto &i:current_student->course_)
+                       {
+                           ++idx;
+                           cout<<idx<<" "<<i->name_<<" "<<i->code_<<endl;
+                       }
+                       cout<<"do you want to see which course???\nenter your choice\n";
+                       int c;
+                       cin>>c;
+
+                       cout<<"course "<<current_student->course_[c-1]->name_<<" this code is"<<current_student->course_[c-1]->code_<<" is taught by doctor "<<current_student->course_[c-1]->doctor_->user_name_<<" and has "<<current_student->course_[c-1]->assignment_.size()<<" assignments\n";
+                       if(current_student->course_[c-1]->assignment_.size()>0)//current_student->course_[c-1]->doctor_->assignment_.size()>0)
+                       {
+                            int idx=0;
+                            for(auto &i:current_student->course_[c-1]->assignment_)
+                            {
+                                ++idx;
+                                cout<<" assignment "<<idx<<" "<<i->information_<<" ";
+                                if(current_student->course_[c-1]->assignment_[idx-1]->solution_=="")
+                                {
+                                    cout<<"NOT ";
+                                }
+                                cout<<" submitted "<<" grade "<<current_student->course_[c-1]->assignment_[idx-1]->grade_<<" / "<<current_student->course_[c-1]->assignment_[idx-1]->max_grade_<<" comment "<<current_student->course_[c-1]->assignment_[idx-1]->comment_<<endl;//solution->solution<<endl;
+                            }
+                       }
+                   g20:cout<<endl<<"1 : unregister from course\n";
+                       cout<<endl<<"2 : submit solution\n";
+                       cout<<endl<<"3 : back\n";
+                       cout<<"enter your choice\n";
+                       int cc;
+                       cin>>cc;
+                       if(cc==1)
+                       {
+
+//here//////////////////////////////////////////////////////////////////////////////////////////////////////
+                            if(current_student->course_.size()>0)
+                            {
+                                cout<<"the courses that you are register in it are\n";
+                                int cccccc=0;
+                                for(auto &i:current_student->course_)
+                                {
+                                    cout<<cccccc<<" "<<i->name_<<" "<<i->code_<<endl;
+                                    cccccc++;
+                                }
+                                cout<<"enter the number of course you want to un register from it\n";
+                                int coco;
+                                cin>>coco;
+                                //[c-1]
+                                int f=0;
+                                for(auto &i:current_student->course_[coco-1]->student_)
+                                {
+                                    if(i->user_name_==current_student->user_name_&&i->password_==current_student->password_)
+                                    {
+                                        current_student->course_[coco-1]->student_.erase(current_student->course_[coco-1]->student_.begin()+f);
+                                        break;
+                                    }
+                                    f++;
+                                }
+                                current_student->course_.erase(current_student->course_.begin()+coco-1);
+                            }
+                            else cout<<"you have not any courses\n";
+                       }
+                       else if(cc==2)
+                       {
+                           cout<<"enter number of assignment that want to submit solution to it\n";
+                           cin>>cc;
+
+                           cout<<"\nenter solution...";
+
+                           string ss;
+                           cin>>ss;
+                           current_student->course_[c-1]->assignment_[cc-1]->solution_=ss;
+                           cout<<"\nDone\n";
+                       }
+                       else if(cc==3)
+                       {
+                           goto g10;
+                       }
+                       else goto g20;
+                       goto g10;
+                    }
+                    else cout<<"there are not any courses to see it\n";
+                    goto g10;
+                   }
+                   else if(c==4)
+                   {
+                        for(auto &i:current_student->course_)
+                        {
+                                cout<<"course code "<<i->code_;
+                                int s1=0,s2=0,s3=0;
+                                for(auto &j:i->assignment_)
+                                {
+                                    if(j->solution_!=""){s1++;}
+                                    s2+=j->grade_;
+                                    s3+=j->max_grade_;
+                                }
+                                cout<<" total assignment submitted "<<s1<<" total grade "<<s2<<" / "<<s3<<"\n";
+                        }
+
+                   }
+                   else if(c==5) goto g1;
+                   goto g10;
+               }
+               else goto g2;
+               cout<<"you login welcome\n";
+           }
+           else if(choice==2)
+           {
+            g3:cout<<"1 : doctor"<<endl;
+               cout<<"2 : student"<<endl;
+               cout<<"enter your choice"<<endl;
+               int c;
+               cin>>c;
+               if(c==1)
+               {
+                   shared_ptr<doctor>d(new doctor());
+                   string user_name,password,full_name,id,email;
+                   cout<<"enter your name..."<<endl;
+                   cin>>user_name;
+                   cout<<"enter your password..."<<endl;
+                   cin>>password;
+                   cout<<"enter your full name..."<<endl;
+                   cin>>full_name;
+                   cout<<"enter your id..."<<endl;
+                   cin>>id;
+                g4:cout<<"enter your email..."<<endl;
+                   cin>>email;
+                   if(!valid_email(email)) goto g4;
+                   d->user_name_=user_name;
+                   d->password_=password;
+                   d->full_name_=full_name;
+                   d->id_=id;
+                   d->email_=email;
+                   doctors.push_back(d);
+               }
+               else if(c==2)
+               {
+                   shared_ptr<student>s(new student());
+                   string user_name,password,full_name,id,email;
+                   cout<<"enter your name..."<<endl;
+                   cin>>user_name;
+                   cout<<"enter your password..."<<endl;
+                   cin>>password;
+                   cout<<"enter your full name..."<<endl;
+                   cin>>full_name;
+                   cout<<"enter your id..."<<endl;
+                   cin>>id;
+                g5:cout<<"enter your email..."<<endl;
+                   cin>>email;
+                   if(!valid_email(email)) goto g5;
+                   s->user_name_=user_name;
+                   s->password_=password;
+                   s->full_name_=full_name;
+                   s->id_=id;
+                   s->email_=email;
+                   students.push_back(s);
+                   //cout<<students[0]->user_name_<<"\n";
+               }
+               else goto g3;
+               cout<<"you registered success"<<endl;
+               goto g1;
+           }
+           else if(choice==3)
+           {
+               cout<<"system is closed"<<endl;
+               break;
+           }
+           else {goto g1;}
+       }
+       /*shared_ptr<course>c(new course());
+       shared_ptr<student>s(new student());
+       shared_ptr<doctor>d(new doctor());
+       //shared_ptr<assignment>s(new assignment());
+       //shared_ptr<assignment_solution>d(new assignment_solution());
+
+       c->name_="p1";
+       c->code_="001";
+
+       s->user_name_="shady";
+       d->user_name_="fad";
+       c->doctor_=d;
+
+       d->course_.push_back(c);
+       s->course_.push_back(c);
+       c->student_.push_back(s);
+       //c->student_.push_back(s);
+       cout<<c->student_[0]->user_name_;*///s->course_[0]->student_[0]->user_name_;///s->name<<" "<<s->reg[0]->name<<" "<<s->reg[0]->code<<" "<<s->reg[0]->doc->name;
+
+
+       //c->cors.push_back("");
+       //student s;
+      // s->name="shady";
+
+
+
+       /*cors.push_back(shared_ptr<int>(new int));
+       cors.push_back(shared_ptr<int>(new int));
+       cors.push_back(shared_ptr<int>(new int));
+       stud.push_back(shared_ptr<int>(new int));
+       stud.push_back(shared_ptr<int>(new int));
+       stud.push_back(shared_ptr<int>(new int));*/
+
+       //stud[0].push_back(cors[1]);
+       //cors[1].push_back(stud[0]);*/
+
+
+
+       //int x=5;
+       //int y=9;
+       //shared_ptr<int>p1(new int);//make_shared<int>(x);
+       //p1=make_shared<int>(x);
+       //shared_ptr<int>p2(new int);
+       //p2=make_shared<int>(p1);
+
+      // cout<<&x<<" "<<p1.get()<<" "<<*p1<<endl;
+      // p1=make_shared<int>(y);
+      // cout<<&y<<" "<<p1.get()<<" "<<*p1<<endl;
+
+       /*cout<<p1.get()<<" "<<p1.use_count()<<" "<<endl;
+       *p1=9;
+       shared_ptr<int>p2(p1);//=make_shared<int>(p1);
+       cout<<*p2<<" "<<*p1<<endl;
+       *p2=5;
+       p2.reset();
+       cout<<" "<<*p1<<endl;
+       cout<<p1.get()<<" "<<p2.get()<<" "<<p1.use_count();*/
+
+       //shared_ptr<int>p3(p2);
+       /*vector<int>cors;
+       cors.push_back(1);
+       cors.push_back(1);
+       cors.push_back(1);
+       vector<int>doc;
+       doc.push_back(1);
+       doc.push_back(1);
+       doc.push_back(1);
+       vector<int>stud;
+       stud.push_back(1);
+       stud.push_back(1);
+       stud.push_back(1);
+
+       shared_ptr<int>p1=make_shared<int>(cors[1]);
+       shared_ptr<int>p2=make_shared<int>(cors[]);
+       cout<<doc.get()<<" "<<stud.get()<<" "<<&cors;
+       cout<<doc.use_count();
+       doc.reset();
+       cout<<*/
+
+
+       /*vector<student>v;
+       string name="shady";
+       int y=9;
+       v.push_back({name,y});
+       cout<<v[0].name<<" "<<v[0].x;*/
+      //int x=5;1
+
+
+      /*vector<shared_ptr<int>>courses;
+      vector<shared_ptr<int>>students;
+      for(int i=0;i<5;i++)
+      {
+          courses.push_back(shared_ptr<int>(new int));
+          students.push_back(shared_ptr<int>(new int));
+      }*/
+
+      //shared_ptr<int>p1=make_shared<int>(v);
+
+    //sorts();
+ //   std::shared_ptr<int> x = std::make_shared<int>(10);
+
+// somewhere else
+//std::shared_ptr<int> ptr = x;
+//*x=9;
+//cout<<*x<<" "<<*ptr;
+    /*int x=5;
+    int &r=x;
+    shared_ptr<int>p1=make_shared<int>(x);
+    shared_ptr<int>p2=make_shared<int>(x);
+    shared_ptr<int>p3(p2);
+    x=9;
+    *p1=1;
+    cout<<&x<<" "<<r<<" "<<*p1<<" "<<*p2<<" "<<*p3;*/
+    //<<endl<<&x<<" "<<p1.get()<<" "<<p2.get()<<endl<<p1.use_count();
+
+    /*int x=50;
+    vector<shared_ptr<int>>v;//(5,nullptr);
+    v.push_back(shared_ptr<int>(new int));
+    *v[0]=10;
+    shared_ptr<int>p1(new int);//=make_shared<int>(x);
+    p1=make_shared<int>(x);
+    x=3;
+    //*p1=5;
+    int *p=&x;
+    cout<<p1<<" "<<p;*/
+    //cout<<*v[0];
+//cout<<*v[0];
+    /*shared_ptr<int>p1=make_shared<int>(v);
+    //shared_ptr<int>p1=v;//=
+    cout<<p1.use_count();
+    shared_ptr<int>p2=p1;//=make_shared<int>(p1);
+    cout<<p2.use_count();
+    weak_ptr<int>p3(p1);
+    shared_ptr<int>p4(p3.lock());
+    cout<<p3.use_count();*/
+    //shared_ptr<int>p1=(new int);
+    //shared_ptr<int>p1(p2);
+
+    //data.close();
+    return 0;
+}
